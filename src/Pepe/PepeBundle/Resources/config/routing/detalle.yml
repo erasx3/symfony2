@@ -1,0 +1,30 @@
+detalle:
+    path:     /
+    defaults: { _controller: "PepeBundle:detalle:index" }
+
+detalle_show:
+    path:     /{id}/show
+    defaults: { _controller: "PepeBundle:detalle:show" }
+
+detalle_new:
+    path:     /new
+    defaults: { _controller: "PepeBundle:detalle:new" }
+
+detalle_create:
+    path:     /create
+    defaults: { _controller: "PepeBundle:detalle:create" }
+    requirements: { _method: post }
+
+detalle_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "PepeBundle:detalle:edit" }
+
+detalle_update:
+    path:     /{id}/update
+    defaults: { _controller: "PepeBundle:detalle:update" }
+    requirements: { _method: post|put }
+
+detalle_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PepeBundle:detalle:delete" }
+    requirements: { _method: post|delete }

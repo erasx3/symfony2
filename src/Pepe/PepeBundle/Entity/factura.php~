@@ -1,0 +1,262 @@
+<?php
+
+namespace Pepe\PepeBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * factura
+ *
+ * @ORM\Table()
+ * @ORM\Entity
+ */
+class factura
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="nroFactura", type="integer")
+     */
+    private $nroFactura;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha", type="date")
+     */
+    private $fecha;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="total", type="float")
+     */
+    private $total;
+    
+    /**
+     *
+     * @ORM\OneToMany(targetEntity="detalle", mappedBy="factura", cascade={"persist", "remove"})
+     */
+    private $detalles;
+   
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="condicionPago", inversedBy="facturas")
+     * @ORM\JoinColumn(name="condicion_id", referencedColumnName="id")
+     */
+    private $condicion;
+    
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="iva", inversedBy="facturas")
+     * @ORM\JoinColumn(name="iva_id", referencedColumnName="id")
+     */
+    private $iva; 
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="localidad", inversedBy="factura")
+     * @ORM\JoinColumn(name="localidad_id", referencedColumnName="id") 
+     * 
+     */
+    private $localidades;
+    
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set nroFactura
+     *
+     * @param integer $nroFactura
+     * @return factura
+     */
+    public function setNroFactura($nroFactura)
+    {
+        $this->nroFactura = $nroFactura;
+
+        return $this;
+    }
+
+    /**
+     * Get nroFactura
+     *
+     * @return integer 
+     */
+    public function getNroFactura()
+    {
+        return $this->nroFactura;
+    }
+
+    /**
+     * Set fecha
+     *
+     * @param \DateTime $fecha
+     * @return factura
+     */
+    public function setFecha($fecha)
+    {
+        $this->fecha = $fecha;
+
+        return $this;
+    }
+
+    /**
+     * Get fecha
+     *
+     * @return \DateTime 
+     */
+    public function getFecha()
+    {
+        return $this->fecha;
+    }
+
+    /**
+     * Set total
+     *
+     * @param float $total
+     * @return factura
+     */
+    public function setTotal($total)
+    {
+        $this->total = $total;
+
+        return $this;
+    }
+
+    /**
+     * Get total
+     *
+     * @return float 
+     */
+    public function getTotal()
+    {
+        return $this->total;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->detalles = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add detalles
+     *
+     * @param \Pepe\PepeBundle\Entity\detalle $detalles
+     * @return factura
+     */
+    public function addDetalle(\Pepe\PepeBundle\Entity\detalle $detalles)
+    {
+        $this->detalles[] = $detalles;
+        $detalles->setFactura($this);
+        return $this;
+    }
+
+    /**
+     * Remove detalles
+     *
+     * @param \Pepe\PepeBundle\Entity\detalle $detalles
+     */
+    public function removeDetalle(\Pepe\PepeBundle\Entity\detalle $detalles)
+    {
+        $this->detalles->removeElement($detalles);
+    }
+
+    /**
+     * Get detalles
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDetalles()
+    {
+        return $this->detalles;
+    }
+
+    /**
+     * Set condicion
+     *
+     * @param \Pepe\PepeBundle\Entity\condicionPago $condicion
+     * @return factura
+     */
+    public function setCondicion(\Pepe\PepeBundle\Entity\condicionPago $condicion = null)
+    {
+        $this->condicion = $condicion;
+
+        return $this;
+    }
+
+    /**
+     * Get condicion
+     *
+     * @return \Pepe\PepeBundle\Entity\condicionPago 
+     */
+    public function getCondicion()
+    {
+        return $this->condicion;
+    }
+
+    /**
+     * Set iva
+     *
+     * @param \Pepe\PepeBundle\Entity\iva $iva
+     * @return factura
+     */
+    public function setIva(\Pepe\PepeBundle\Entity\iva $iva = null)
+    {
+        $this->iva = $iva;
+
+        return $this;
+    }
+
+    /**
+     * Get iva
+     *
+     * @return \Pepe\PepeBundle\Entity\iva 
+     */
+    public function getIva()
+    {
+        return $this->iva;
+    }
+
+    /**
+     * Set localidad
+     *
+     * @param \Pepe\PepeBundle\Entity\localidad $localidad
+     * @return factura
+     */
+    public function setLocalidad(\Pepe\PepeBundle\Entity\localidad $localidad = null)
+    {
+        $this->localidad = $localidad;
+
+        return $this;
+    }
+
+    /**
+     * Get localidad
+     *
+     * @return \Pepe\PepeBundle\Entity\localidad 
+     */
+    public function getLocalidad()
+    {
+        return $this->localidad;
+    }
+    public function __toString(){
+        return strval($this->nroFactura);
+    }
+}

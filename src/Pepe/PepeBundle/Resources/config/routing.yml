@@ -1,0 +1,30 @@
+hello:
+    path:     /hello/{name}
+    defaults: { _controller: PepeBundle:Hello:index }
+bye:
+    path:     /bye/{name}
+    defaults: { _controller: PepeBundle:Default:index }
+PepeBundle_factura:
+    resource: "@PepeBundle/Resources/config/routing/factura.yml"
+    prefix:   /factura
+PepeBundle_provincia:
+    resource: "@PepeBundle/Resources/config/routing/provincia.yml"
+    prefix:   /provincia
+PepeBundle_localidad:
+    resource: "@PepeBundle/Resources/config/routing/localidad.yml"
+    prefix:   /localidad
+PepeBundle_proveedor:
+    resource: "@PepeBundle/Resources/config/routing/proveedor.yml"
+    prefix:   /proveedor
+PepeBundle_producto:
+    resource: "@PepeBundle/Resources/config/routing/producto.yml"
+    prefix:   /producto
+PepeBundle_detalle:
+    resource: "@PepeBundle/Resources/config/routing/detalle.yml"
+    prefix:   /detalle
+PepeBundle_iva:
+    resource: "@PepeBundle/Resources/config/routing/iva.yml"
+    prefix:   /iva
+PepeBundle_condicionpago:
+    resource: "@PepeBundle/Resources/config/routing/condicionpago.yml"
+    prefix:   /condicionpago

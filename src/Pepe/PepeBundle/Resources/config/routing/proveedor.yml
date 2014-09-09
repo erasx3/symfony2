@@ -1,0 +1,30 @@
+proveedor:
+    path:     /
+    defaults: { _controller: "PepeBundle:proveedor:index" }
+
+proveedor_show:
+    path:     /{id}/show
+    defaults: { _controller: "PepeBundle:proveedor:show" }
+
+proveedor_new:
+    path:     /new
+    defaults: { _controller: "PepeBundle:proveedor:new" }
+
+proveedor_create:
+    path:     /create
+    defaults: { _controller: "PepeBundle:proveedor:create" }
+    requirements: { _method: post }
+
+proveedor_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "PepeBundle:proveedor:edit" }
+
+proveedor_update:
+    path:     /{id}/update
+    defaults: { _controller: "PepeBundle:proveedor:update" }
+    requirements: { _method: post|put }
+
+proveedor_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PepeBundle:proveedor:delete" }
+    requirements: { _method: post|delete }

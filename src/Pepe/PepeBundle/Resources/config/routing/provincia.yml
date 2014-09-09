@@ -1,0 +1,30 @@
+provincia:
+    path:     /
+    defaults: { _controller: "PepeBundle:provincia:index" }
+
+provincia_show:
+    path:     /{id}/show
+    defaults: { _controller: "PepeBundle:provincia:show" }
+
+provincia_new:
+    path:     /new
+    defaults: { _controller: "PepeBundle:provincia:new" }
+
+provincia_create:
+    path:     /create
+    defaults: { _controller: "PepeBundle:provincia:create" }
+    requirements: { _method: post }
+
+provincia_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "PepeBundle:provincia:edit" }
+
+provincia_update:
+    path:     /{id}/update
+    defaults: { _controller: "PepeBundle:provincia:update" }
+    requirements: { _method: post|put }
+
+provincia_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PepeBundle:provincia:delete" }
+    requirements: { _method: post|delete }

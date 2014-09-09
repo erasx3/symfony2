@@ -1,0 +1,16 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    {{ parent()}}
+    <h1>Agregar Nueva Localidad</h1>
+
+    {{ form(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('localidad') }}">
+            Volver a la Lista
+        </a>
+    </li>
+</ul>
+{% endblock %}

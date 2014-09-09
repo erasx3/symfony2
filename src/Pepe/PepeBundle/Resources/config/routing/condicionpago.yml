@@ -1,0 +1,30 @@
+condicionpago:
+    path:     /
+    defaults: { _controller: "PepeBundle:condicionPago:index" }
+
+condicionpago_show:
+    path:     /{id}/show
+    defaults: { _controller: "PepeBundle:condicionPago:show" }
+
+condicionpago_new:
+    path:     /new
+    defaults: { _controller: "PepeBundle:condicionPago:new" }
+
+condicionpago_create:
+    path:     /create
+    defaults: { _controller: "PepeBundle:condicionPago:create" }
+    requirements: { _method: post }
+
+condicionpago_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "PepeBundle:condicionPago:edit" }
+
+condicionpago_update:
+    path:     /{id}/update
+    defaults: { _controller: "PepeBundle:condicionPago:update" }
+    requirements: { _method: post|put }
+
+condicionpago_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PepeBundle:condicionPago:delete" }
+    requirements: { _method: post|delete }

@@ -1,0 +1,30 @@
+iva:
+    path:     /
+    defaults: { _controller: "PepeBundle:iva:index" }
+
+iva_show:
+    path:     /{id}/show
+    defaults: { _controller: "PepeBundle:iva:show" }
+
+iva_new:
+    path:     /new
+    defaults: { _controller: "PepeBundle:iva:new" }
+
+iva_create:
+    path:     /create
+    defaults: { _controller: "PepeBundle:iva:create" }
+    requirements: { _method: post }
+
+iva_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "PepeBundle:iva:edit" }
+
+iva_update:
+    path:     /{id}/update
+    defaults: { _controller: "PepeBundle:iva:update" }
+    requirements: { _method: post|put }
+
+iva_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PepeBundle:iva:delete" }
+    requirements: { _method: post|delete }

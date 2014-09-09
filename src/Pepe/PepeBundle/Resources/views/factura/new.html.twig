@@ -1,0 +1,176 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    {{ parent()}}
+
+    <h1>Creacion de Factura</h1>
+
+
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    <div class="row">
+        <div class="col-md-2">
+            {{form_label(form.nroFactura)}}
+        </div>
+        <div class="col-md-4">
+            {{form_errors(form.nroFactura)}}
+            {{form_widget(form.nroFactura)}}
+        </div>
+        <div class="col-md-2">
+            {{form_label(form.fecha)}}
+        </div>
+        <div class="col-md-4">           
+            {{form_errors(form.fecha)}}
+            {{form_widget(form.fecha)}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            {{form_label(form.total)}}
+        </div>
+        <div class="col-md-4">
+            {{form_errors(form.total)}}
+            {{form_widget(form.total)}}
+        </div>
+        <div class="col-md-2">
+            {{form_label(form.condicion)}}
+        </div>
+        <div class="col-md-4">
+            {{form_errors(form.condicion)}}
+            {{form_widget(form.condicion)}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            {{form_label(form.provincia)}}
+        </div>
+        <div class="col-md-4">
+            {{form_errors(form.provincia)}}
+            {{form_widget(form.provincia)}}
+        </div>
+        <div class="col-md-2">
+            {{form_label(form.localidades)}}
+        </div>
+        <div class="col-md-4">
+            {{form_errors(form.localidades)}}
+            {{form_widget(form.localidades)}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            {{form_label(form.iva)}}
+        </div>
+        <div class="col-md-4">
+            {{form_errors(form.iva)}}
+            {{form_widget(form.iva)}}
+        </div>        
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            {{form_label(form.detalles)}}
+        </div>
+    </div> 
+    <div class="row">
+        <div class="col-md-8">
+            {{form_errors(form.detalles)}}
+            {{form_widget(form.detalles)}}
+        </div> 
+    </div>
+</div>
+<button type="{{ type|default('button') }}" {{ block('button_attributes') }}>guardar</button>
+
+
+
+{{ form_end(form) }}
+
+
+{# {{ form(form) }} #}
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('factura') }}">
+            Volver a la Lista
+        </a>
+    </li>
+</ul>
+
+
+{% endblock %}
+{% block javascripts %}
+
+    {{parent()}}
+    <script>
+
+        var $collectionHolder;
+
+        // setup an "add a tag" link
+        var $addTagLink = $('<a href="#" class="add_tag_link">Add a tag</a>');
+        var $newLinkLi = $('<li></li>').append($addTagLink);
+
+        jQuery(document).ready(function() {
+            // Get the ul that holds the collection of tags
+
+            $collectionHolder = $('#pepe_pepebundle_factura_detalles');
+
+            // add the "add a tag" anchor and li to the tags ul
+            $collectionHolder.append($newLinkLi);
+
+            // count the current form inputs we have (e.g. 2), use that as the new
+            // index when inserting a new item (e.g. 2)
+            $collectionHolder.data('index', $collectionHolder.find(':input').length);
+
+            $addTagLink.on('click', function(e) {
+                // prevent the link from creating a "#" on the URL
+                e.preventDefault();
+
+                // add a new tag form (see next code block)
+                addTagForm($collectionHolder, $newLinkLi);
+            });
+
+
+        });
+
+        function addTagForm($collectionHolder, $newLinkLi) {
+            // Get the data-prototype explained earlier
+            var prototype = $collectionHolder.data('prototype');
+
+            // get the new index
+            var index = $collectionHolder.data('index');
+
+            // Replace '__name__' in the prototype's HTML to
+            // instead be a number based on how many items we have
+            var newForm = prototype.replace(/__name__/g, index);
+
+            // increase the index with one for the next item
+            $collectionHolder.data('index', index + 1);
+
+            // Display the form in the page in an li, before the "Add a tag" link li
+            var $newFormLi = $('<li></li>').append(newForm);
+            $newLinkLi.before($newFormLi);
+        }
+        jQuery(document).ready(function($) {
+            $("#pepe_pepebundle_factura_provincia").change(function() {
+                var data = {
+                    provincia_id: $(this).val()
+                };
+                $.ajax({
+                    type: 'post',
+                    url: '{{ path("seleccionar_localidad") }}',
+                    data: data,
+                    success: function(data) {
+                        $('#pepe_pepebundle_factura_localidades').html(data);
+                    }
+                });
+            });
+        });
+        // $(function() {
+        //     $("#dialog").dialog({
+        //         modal: true
+        //     });
+        // });
+        $(function() {
+            $("#pepe_pepebundle_factura_fecha").datepicker();
+        });
+        
+
+    </script>
+{% endblock %}

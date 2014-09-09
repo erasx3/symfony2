@@ -1,0 +1,7 @@
+parameters:
+#    pepe.example.class: Pepe\PepeBundle\Example
+
+services:
+#    pepe.example:
+#        class: %pepe.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
