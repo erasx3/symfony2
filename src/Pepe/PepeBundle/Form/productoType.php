@@ -19,7 +19,11 @@ class productoType extends AbstractType
             ->add('precio')
             ->add('precioCosto')
             ->add('activo')
-            ->add('fechaAlta')
+            ->add('fechaAlta','date',array(
+            'widget' => 'single_text',
+            'format' => 'dd-MM-yyyy',
+            'attr' => array('class' => 'date') 
+                ))
             ->add('proveedor')
         ;
     }

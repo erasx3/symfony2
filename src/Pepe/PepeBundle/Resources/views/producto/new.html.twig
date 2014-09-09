@@ -14,3 +14,13 @@
     </li>
 </ul>
 {% endblock %}
+{% block javascripts %}
+    {{ parent()}}
+    <script>
+        $(function() {
+            $("#pepe_pepebundle_producto_fechaAlta").datepicker();
+        });
+    </script>
+    
+{% endblock %}
+
