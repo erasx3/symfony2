@@ -23,16 +23,30 @@ class facturaType extends AbstractType
         $builder->addEventSubscriber($provinciaSubscriber);
         
         $builder
-            ->add('nroFactura')
-//            ->add('fecha')
+            ->add('nroFactura','number', array(
+            'required' => true
+                ))
             ->add('fecha','date',array(
             'widget' => 'single_text',
             'format' => 'dd-MM-yyyy',
+            'required' => true,
             'attr' => array('class' => 'date') 
                 ))
-            ->add('total')
-            ->add('condicion')
-            ->add('iva')
+            ->add('total', 'number', array(
+            'read_only' => true,
+            'empty_data' => '0,00',
+            'disabled' => true
+                ))
+            ->add('condicion', 'entity', array(
+            'required' => true,
+            'class' => 'PepeBundle:condicionPago',
+            'empty_value' => '',
+                ))        
+            ->add('iva', 'entity', array(
+            'required' => true,
+            'class' => 'PepeBundle:iva',
+            'empty_value' => ''
+                ))
 //            ->add('localidades')
         ; 
         $builder->add('detalles', 'collection', array(

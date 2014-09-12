@@ -5,3 +5,6 @@ services:
 #    pepe.example:
 #        class: %pepe.example.class%
 #        arguments: [@service_id, "plain_value", %parameter%]
+ factura.buscador:
+        class: Pepe\PepeBundle\Services\BuscadorFactura
+        arguments: [@doctrine.orm.entity_manager]

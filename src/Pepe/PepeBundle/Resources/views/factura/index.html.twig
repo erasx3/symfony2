@@ -1,9 +1,12 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-{{ parent()}}
+    {{ parent()}}
     <h1>factura list</h1>
-
+    <form action="{{path('factura') }}" method="post" {{ form_enctype(filter_form)}}
+          {{form_widget (filter_form)}}
+          <button type="submit"><i class="search"></i> Buscar </button>
+    </form>
     <table class="table table-list table-hover records_list">
         <thead>
             <tr>
@@ -15,32 +18,32 @@
             </tr>
         </thead>
         <tbody>
-        {% for entity in entities %}
-            <tr>
-                <td><a href="{{ path('factura_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.nroFactura }}</td>
-                <td>{% if entity.fecha %}{{ entity.fecha|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ entity.total }}</td>
-                <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('factura_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('factura_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
-                </td>
-            </tr>
-        {% endfor %}
+            {% for entity in entities %}
+                <tr>
+                    <td><a href="{{ path('factura_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                    <td>{{ entity.nroFactura }}</td>
+                    <td>{% if entity.fecha %}{{ entity.fecha|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td>{{ entity.total }}</td>
+                    <td>
+                        <ul>
+                            <li>
+                                <a href="{{ path('factura_show', { 'id': entity.id }) }}">show</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('factura_edit', { 'id': entity.id }) }}">edit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 
-        <ul>
+    <ul>
         <li>
             <a class="btn btn-primary" href="{{ path('factura_new') }}">
                 Create a new entry
             </a>
         </li>
     </ul>
-    {% endblock %}
+{% endblock %}

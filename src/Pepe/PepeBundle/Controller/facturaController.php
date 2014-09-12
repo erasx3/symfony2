@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Pepe\PepeBundle\Entity\factura;
 use Pepe\PepeBundle\Entity\detalle;
 use Pepe\PepeBundle\Form\facturaType;
+use Pepe\PepeBundle\Form\facturaFilterType;
 
 /**
  * factura controller.
@@ -20,11 +21,24 @@ class facturaController extends Controller
      * Lists all factura entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('PepeBundle:factura')->findAll();
+        
+        $filterForm = $this->createForm(new facturaFilterType());
+        
+        if ($request->getMethod() == 'POST') {
+            $filterForm->handleRequest($request);
+            if ($filterForm->isValid()) {
+                $arrayFiltros = $filterForm->getData();
+                
+                $servicioBusqueda = $this->get('factura.buscador');
+                $entities = $servicioBusqueda->getAcFacturasFiltradas($arrayFiltros);
+                
+            }
+        }
 
         return $this->render('PepeBundle:factura:index.html.twig', array(
             'entities' => $entities,
@@ -79,9 +93,7 @@ class facturaController extends Controller
      */
     public function newAction()
     {
-        $entity = new factura();
-        
-        
+        $entity = new factura();      
         $form   = $this->createCreateForm($entity);
         
         
