@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * localidad
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Pepe\PepeBundle\Entity\localidadRepository")
  */
 class localidad
 {
@@ -133,4 +133,44 @@ class localidad
         return $this->descripcion;
     }
  
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->factura = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add factura
+     *
+     * @param \Pepe\PepeBundle\Entity\factura $factura
+     * @return localidad
+     */
+    public function addFactura(\Pepe\PepeBundle\Entity\factura $factura)
+    {
+        $this->factura[] = $factura;
+
+        return $this;
+    }
+
+    /**
+     * Remove factura
+     *
+     * @param \Pepe\PepeBundle\Entity\factura $factura
+     */
+    public function removeFactura(\Pepe\PepeBundle\Entity\factura $factura)
+    {
+        $this->factura->removeElement($factura);
+    }
+
+    /**
+     * Get factura
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFactura()
+    {
+        return $this->factura;
+    }
 }

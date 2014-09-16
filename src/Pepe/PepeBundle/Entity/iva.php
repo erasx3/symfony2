@@ -28,6 +28,13 @@ class iva
      */
     private $descripcion;
     
+     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="activo", type="boolean")
+     */
+    private $activo;
+    
     /**
      *
      * @ORM\OneToMany(targetEntity="factura", mappedBy="iva")
@@ -106,7 +113,31 @@ class iva
     {
         return $this->facturas;
     }
+    
     public function __toString(){
         return $this->descripcion;
+    }
+
+    /**
+     * Set activo
+     *
+     * @param boolean $activo
+     * @return iva
+     */
+    public function setActivo($activo)
+    {
+        $this->activo = $activo;
+
+        return $this;
+    }
+
+    /**
+     * Get activo
+     *
+     * @return boolean 
+     */
+    public function getActivo()
+    {
+        return $this->activo;
     }
 }

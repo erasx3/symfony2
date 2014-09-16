@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * factura
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Pepe\PepeBundle\Entity\facturaRepository")
  */
 class factura
 {
@@ -234,29 +234,31 @@ class factura
         return $this->iva;
     }
 
+
+    public function __toString(){
+        return strval($this->nroFactura);
+    }
+
     /**
-     * Set localidad
+     * Set localidades
      *
-     * @param \Pepe\PepeBundle\Entity\localidad $localidad
+     * @param \Pepe\PepeBundle\Entity\localidad $localidades
      * @return factura
      */
-    public function setLocalidad(\Pepe\PepeBundle\Entity\localidad $localidad = null)
+    public function setLocalidades(\Pepe\PepeBundle\Entity\localidad $localidades = null)
     {
-        $this->localidad = $localidad;
+        $this->localidades = $localidades;
 
         return $this;
     }
 
     /**
-     * Get localidad
+     * Get localidades
      *
      * @return \Pepe\PepeBundle\Entity\localidad 
      */
-    public function getLocalidad()
+    public function getLocalidades()
     {
-        return $this->localidad;
-    }
-    public function __toString(){
-        return strval($this->nroFactura);
+        return $this->localidades;
     }
 }

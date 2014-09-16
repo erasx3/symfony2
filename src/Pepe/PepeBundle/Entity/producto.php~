@@ -43,9 +43,9 @@ class producto
     private $precioCosto;
 
     /**
-     * @var string
+     * @var boolean
      *
-     * @ORM\Column(name="activo", type="string", length=255)
+     * @ORM\Column(name="activo", type="boolean")
      */
     private $activo;
 

@@ -26,7 +26,7 @@ class facturaController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('PepeBundle:factura')->findAll();
-        
+                      
         $filterForm = $this->createForm(new facturaFilterType());
         
         if ($request->getMethod() == 'POST') {
@@ -41,7 +41,8 @@ class facturaController extends Controller
         }
 
         return $this->render('PepeBundle:factura:index.html.twig', array(
-            'entities' => $entities,
+            'entities' => $entities,           
+            'filter_form' => $filterForm->createView(),
         ));
     }
     /**
@@ -49,11 +50,11 @@ class facturaController extends Controller
      *
      */
     public function createAction(Request $request)
-    {
+    {      
         $entity = new factura();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
-
+                       
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);

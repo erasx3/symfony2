@@ -9,9 +9,9 @@ class facturaRepository extends EntityRepository
 {
     public function getAcFacturasFiltradas($filtrosArray){
         $qb = $this->createQueryBuilder('f');
-        if($filtrosArray['numeroFactura']){
-            $qb->where('f.numeroFactura = :nroFactura')
-                    ->setParameter('nroFactura', $filtrosArray['numeroFactura']);
+        if($filtrosArray['nroFactura']){
+            $qb->where('f.nroFactura = :nroFactura')
+                    ->setParameter('nroFactura', $filtrosArray['nroFactura']);
         }
         return $qb->getQuery()->getResult();
     }

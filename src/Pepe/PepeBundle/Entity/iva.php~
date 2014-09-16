@@ -28,6 +28,13 @@ class iva
      */
     private $descripcion;
     
+     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="activo", type="boolean")
+     */
+    private $activo;
+    
     /**
      *
      * @ORM\OneToMany(targetEntity="factura", mappedBy="iva")

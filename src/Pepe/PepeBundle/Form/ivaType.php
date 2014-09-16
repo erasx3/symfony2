@@ -16,6 +16,9 @@ class ivaType extends AbstractType
     {
         $builder
             ->add('descripcion')
+            ->add('activo', 'checkbox' ,array(
+                'required' => false
+                ))
         ;
     }
     
