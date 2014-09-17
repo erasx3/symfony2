@@ -2,6 +2,9 @@
 
 {% block body -%}
     {{ parent()}}
+    {% if form is defined %}
+        {% form_theme form 'PepeBundle:Default:form_especial.html.twig' %}
+    {%endif%}
 
     <h1>Creacion de Factura</h1>
 
@@ -77,15 +80,16 @@
                         {{form_widget(form.detalles)}}
                     </div> 
                 </div>
-                <div id="detalle-factura">
-                    {{form_label(form.detalles)}}<a href="#" class="btn btn-xs btn-info add_item"><i class="glyphicon glyphicon-plus glyphicon-white"></i> Agregar Detalle</a>
-                    {{form_errors(form.detalles)}}
+                <div class="row items" id="Factura_detalle"   data-prototype="{{form_widget(form.detalles.vars.prototype)|e }}">
+
                 </div>
 
 
 
 
-                <input type="submit" value="Crear Factura"/>
+
+
+                {{ form_rest(form) }}
             </form>
         </div>
     </div>
@@ -106,12 +110,11 @@
 
     {{parent()}}
     <script>
-
         var $collectionHolder;
 
         // setup an "add a tag" link
-        var $addTagLink = $('<a href="#" class="add_tag_link">Nuevo Detalle</a>');
-        var $newLinkLi = $('<div class="row"></div>').append($addTagLink);
+        var $addTagLink = $('<a href="#" class="add_tag_link">Agregar Detalle</a>');
+        var $newLinkLi = $('<div></div>').append($addTagLink);
 
         jQuery(document).ready(function() {
             // Get the ul that holds the collection of tags
@@ -151,10 +154,10 @@
             $collectionHolder.data('index', index + 1);
 
             // Display the form in the page in an li, before the "Add a tag" link li
-            var $newFormLi = $('<div id="detalle"></div>').append(newForm);
+            var $newFormLi = $('<div></div>').append(newForm);
             $newLinkLi.before($newFormLi);
-
         }
+
         jQuery(document).ready(function($) {
             $("#pepe_pepebundle_factura_provincia").change(function() {
                 var data = {
@@ -179,6 +182,9 @@
             $("#pepe_pepebundle_factura_fecha").datepicker({dateFormat: 'dd/mm/yy'});
 
         });
+
+
+
 
 
     </script>

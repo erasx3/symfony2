@@ -33,9 +33,8 @@ class facturaFilterType extends AbstractType {
         'attr' => array('class' => 'date')
         ))
         ->add('total', 'number', array(
-        'read_only' => true,
         'empty_data' => '0',
-        'disabled' => true
+            'required'=> false,
         ))
         ->add('iva', 'entity', array('required' => true,
         'class' => 'PepeBundle:iva',

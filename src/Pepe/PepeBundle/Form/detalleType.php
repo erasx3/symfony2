@@ -2,6 +2,7 @@
 
 namespace Pepe\PepeBundle\Form;
 
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -17,8 +18,15 @@ class detalleType extends AbstractType
         $builder
             ->add('cantidad')
             ->add('factura')
-            ->add('producto')
-        ;
+//            ->add('producto');
+            ->add('producto', 'entity', array('required' => true,
+                    'class' => 'PepeBundle:Producto',
+                    'empty_value' => '',
+                    'query_builder' => function(EntityRepository $prod) {
+                        return $prod->createQueryBuilder('producto')
+                                ->where('producto.activo = true');
+                    }
+            ));
     }
     
     /**

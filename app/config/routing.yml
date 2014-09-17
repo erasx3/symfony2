@@ -1,3 +1,7 @@
+pepe_user:
+    resource: "@PepeUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
 pepe:
     resource: "@PepeBundle/Resources/config/routing.yml"
     prefix:   /

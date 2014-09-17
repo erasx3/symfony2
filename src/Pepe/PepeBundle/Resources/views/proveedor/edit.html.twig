@@ -5,13 +5,14 @@
     <h1>Editar Proveedor</h1>
 
     {{ form(edit_form) }}
+    {{ form(delete_form) }}
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('proveedor') }}">
-            Volver a la Lista
+
+    <div class="well bs-component">
+        <a class="btn btn-primary" href="{{ path('proveedor') }}">
+            Volver
         </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+    </div>
+
+
 {% endblock %}

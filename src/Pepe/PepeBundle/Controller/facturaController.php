@@ -4,7 +4,6 @@ namespace Pepe\PepeBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
 use Pepe\PepeBundle\Entity\factura;
 use Pepe\PepeBundle\Entity\detalle;
 use Pepe\PepeBundle\Form\facturaType;
@@ -14,47 +13,44 @@ use Pepe\PepeBundle\Form\facturaFilterType;
  * factura controller.
  *
  */
-class facturaController extends Controller
-{
+class facturaController extends Controller {
 
     /**
      * Lists all factura entities.
      *
      */
-    public function indexAction(Request $request)
-    {
+    public function indexAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('PepeBundle:factura')->findAll();
-                      
+
         $filterForm = $this->createForm(new facturaFilterType());
-        
+
         if ($request->getMethod() == 'POST') {
             $filterForm->handleRequest($request);
             if ($filterForm->isValid()) {
                 $arrayFiltros = $filterForm->getData();
-                
+
                 $servicioBusqueda = $this->get('factura.buscador');
                 $entities = $servicioBusqueda->getAcFacturasFiltradas($arrayFiltros);
-                
             }
         }
 
         return $this->render('PepeBundle:factura:index.html.twig', array(
-            'entities' => $entities,           
-            'filter_form' => $filterForm->createView(),
+                    'entities' => $entities,
+                    'filter_form' => $filterForm->createView(),
         ));
     }
+
     /**
      * Creates a new factura entity.
      *
      */
-    public function createAction(Request $request)
-    {      
+    public function createAction(Request $request) {
         $entity = new factura();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
-                       
+
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
@@ -64,8 +60,8 @@ class facturaController extends Controller
         }
 
         return $this->render('PepeBundle:factura:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
+                    'entity' => $entity,
+                    'form' => $form->createView(),
         ));
     }
 
@@ -76,8 +72,7 @@ class facturaController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(factura $entity)
-    {
+    private function createCreateForm(factura $entity) {
         $form = $this->createForm(new facturaType(), $entity, array(
             'action' => $this->generateUrl('factura_create'),
             'method' => 'POST',
@@ -92,16 +87,15 @@ class facturaController extends Controller
      * Displays a form to create a new factura entity.
      *
      */
-    public function newAction()
-    {
-        $entity = new factura();      
-        $form   = $this->createCreateForm($entity);
-        
-        
+    public function newAction() {
+        $entity = new factura();
+        $form = $this->createCreateForm($entity);
+
+
 
         return $this->render('PepeBundle:factura:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
+                    'entity' => $entity,
+                    'form' => $form->createView(),
         ));
     }
 
@@ -109,8 +103,7 @@ class facturaController extends Controller
      * Finds and displays a factura entity.
      *
      */
-    public function showAction($id)
-    {
+    public function showAction($id) {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('PepeBundle:factura')->find($id);
@@ -122,8 +115,8 @@ class facturaController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('PepeBundle:factura:show.html.twig', array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
+                    'entity' => $entity,
+                    'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -131,8 +124,7 @@ class facturaController extends Controller
      * Displays a form to edit an existing factura entity.
      *
      */
-    public function editAction($id)
-    {
+    public function editAction($id) {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('PepeBundle:factura')->find($id);
@@ -145,21 +137,20 @@ class facturaController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('PepeBundle:factura:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+                    'entity' => $entity,
+                    'edit_form' => $editForm->createView(),
+                    'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-    * Creates a form to edit a factura entity.
-    *
-    * @param factura $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
-    private function createEditForm(factura $entity)
-    {
+     * Creates a form to edit a factura entity.
+     *
+     * @param factura $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createEditForm(factura $entity) {
         $form = $this->createForm(new facturaType(), $entity, array(
             'action' => $this->generateUrl('factura_update', array('id' => $entity->getId())),
             'method' => 'PUT',
@@ -169,12 +160,12 @@ class facturaController extends Controller
 
         return $form;
     }
+
     /**
      * Edits an existing factura entity.
      *
      */
-    public function updateAction(Request $request, $id)
-    {
+    public function updateAction(Request $request, $id) {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('PepeBundle:factura')->find($id);
@@ -194,17 +185,17 @@ class facturaController extends Controller
         }
 
         return $this->render('PepeBundle:factura:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+                    'entity' => $entity,
+                    'edit_form' => $editForm->createView(),
+                    'delete_form' => $deleteForm->createView(),
         ));
     }
+
     /**
      * Deletes a factura entity.
      *
      */
-    public function deleteAction(Request $request, $id)
-    {
+    public function deleteAction(Request $request, $id) {
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
 
@@ -230,13 +221,13 @@ class facturaController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm($id)
-    {
+    private function createDeleteForm($id) {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('factura_delete', array('id' => $id)))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
+                        ->setAction($this->generateUrl('factura_delete', array('id' => $id)))
+                        ->setMethod('DELETE')
+                        ->add('submit', 'submit', array('label' => 'Delete'))
+                        ->getForm()
         ;
     }
+
 }

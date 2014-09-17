@@ -2,16 +2,14 @@
 
 {% block body -%}
     {{ parent()}}
-    <h1>condicionPago edit</h1>
+    <h1>Condiciones de Pago</h1>
 
     {{ form(edit_form) }}
+    {{ form(delete_form) }}
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('condicionpago') }}">
-            Back to the list
+    <div class="well bs-component">
+        <a class="btn btn-primary"  href="{{ path('condicionpago') }}">
+            Volver
         </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+    </div>
 {% endblock %}

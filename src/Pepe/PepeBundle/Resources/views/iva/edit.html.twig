@@ -5,13 +5,13 @@
     <h1>Editar Iva</h1>
 
     {{ form(edit_form) }}
+    {{ form(delete_form) }}
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('iva') }}">
-            Volver a la Lista
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+    <div class="well bs-component">
+
+
+        <a class="btn btn-primary" href="{{ path('iva') }}">
+            Volver
+        </a></div>
+
 {% endblock %}

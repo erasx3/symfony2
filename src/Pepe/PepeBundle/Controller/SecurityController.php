@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\HttpFoundation\Response;
 
-class UserController extends Controller {
+class SecurityController extends Controller {
 
     public function loginAction() {
         $request = $this->getRequest();

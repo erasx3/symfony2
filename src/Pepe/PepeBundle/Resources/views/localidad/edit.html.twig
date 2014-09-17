@@ -5,13 +5,11 @@
     <h1>Editar Localidad</h1>
 
     {{ form(edit_form) }}
+    {{ form(delete_form) }}
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('localidad') }}">
-            Volver a la lista
+    <div class="well bs-component">  
+        <a class="btn btn-primary" href="{{ path('localidad') }}">
+            Volver
         </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+    </div>
 {% endblock %}

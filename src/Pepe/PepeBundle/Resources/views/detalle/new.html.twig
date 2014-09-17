@@ -4,7 +4,28 @@
     {{ parent()}}
     <h1>detalle creation</h1>
 
-    {{ form(form) }}
+    <div class="well bs-component">
+            <form class="" action="{{ path('factura_create') }}" method="post" {{ form_enctype(form) }}>
+                {{ form_errors(form) }}
+                <div class="row">
+                    <div class="col-md-2">
+                        {{form_label(form.cantidad)}}
+                    </div>
+                    <div class="col-md-4">
+                        {{form_errors(form.cantidad)}}
+                        {{form_widget(form.cantidad)}}
+                    </div>
+                    <div class="col-md-2">
+                        {{form_label(form.producto)}}
+                    </div>
+                    <div class="col-md-4">           
+                        {{form_errors(form.producto)}}
+                        {{form_widget(form.producto)}}
+                    </div>
+                </div>
+                    {{ form_rest(form) }}
+            </form>
+    </div>
 
         <ul class="record_actions">
     <li>

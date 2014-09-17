@@ -3,11 +3,13 @@
 {% block body -%}
     {{ parent()}}
     <h1>factura list</h1>
-    <form action="{{path('factura') }}" method="post"> 
-          {{ form_enctype(filter_form)}}
-          {{form_widget (filter_form)}}
-          <button type="submit"><i class="search"></i> Buscar </button>
-    </form>
+    <div class="well bs-component">
+        <form action="{{path('factura') }}" method="post"> 
+            {{ form_enctype(filter_form)}}
+            {{form_widget (filter_form)}}
+            <button class="btn btn-primary" type="submit"><i class="search"></i> Buscar </button>
+        </form>
+    </div>
     <table class="table table-list table-hover records_list">
         <thead>
             <tr>
@@ -40,9 +42,18 @@
         </tbody>
     </table>
 
-    
-            <a class="btn btn-primary" href="{{ path('factura_new') }}">
-                Nueva Venta
-            </a>
-      
+
+    <a class="btn btn-primary" href="{{ path('factura_new') }}">
+        Nueva Venta
+    </a>
+
 {% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(function() {
+            $("#pepe_pepebundle_factura_fecha").datepicker({dateFormat: 'dd/mm/yy'});
+
+        });
+    </script>
+{% endblock%}

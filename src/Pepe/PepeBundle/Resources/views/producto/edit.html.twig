@@ -5,15 +5,14 @@
     <h1>Editar Producto</h1>
 
     {{ form(edit_form) }}
+    {{ form(delete_form) }}
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('producto') }}">
-            Volver a la Lista
+    <div class="well bs-component">
+        <a class="btn btn-primary" href="{{ path('producto') }}">
+            Volver
         </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+    </div>
+
 {% endblock %}
 {% block javascripts %}
     {{ parent()}}
@@ -22,5 +21,5 @@
             $("#pepe_pepebundle_producto_fechaAlta").datepicker();
         });
     </script>
-    
+
 {% endblock %}
