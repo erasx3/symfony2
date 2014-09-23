@@ -27,10 +27,6 @@ security:
             pattern:  ^/demo/secured/login$
             security: false
 
-                
-            #anonymous: ~
-            #http_basic:
-            #    realm: "Secured Demo Area"
         main:
             pattern: ^/
             form_login:
